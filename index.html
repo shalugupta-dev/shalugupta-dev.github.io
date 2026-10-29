@@ -1,590 +1,1531 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#060816">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shalu Gupta | 3D Developer Portfolio</title>
 
-    <meta name="description"
-        content="Shalu Gupta - DevOps Engineer Fresher Portfolio">
+<meta name="description" content="Shalu Gupta — Python, Django and Backend Developer. Explore my projects, skills and experience.">
 
-    <title>Shalu Gupta | DevOps Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-    <!-- CSS -->
-    <link rel="stylesheet" href="style.css">
+<style>
+:root {
+    --bg: #060816;
+    --panel: #0d1327;
+    --blue: #3987ff;
+    --cyan: #42e8ff;
+    --purple: #a16cff;
+    --white: #f5f7ff;
+    --muted: #a0abc5;
+    --border: rgba(130,160,255,.18);
+}
 
-    <!-- Three.js -->
-    <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Inter, sans-serif;
+    background: var(--bg);
+    color: var(--white);
+    overflow-x: hidden;
+    line-height: 1.7;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+button {
+    font: inherit;
+}
+
+.container {
+    width: min(1120px, 90%);
+    margin: auto;
+}
+
+section {
+    padding: 100px 0;
+    scroll-margin-top: 80px;
+}
+
+.gradient {
+    background: linear-gradient(110deg, #3987ff, #42e8ff, #a16cff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.eyebrow {
+    color: var(--cyan);
+    font-size: 12px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    font-weight: 800;
+    margin-bottom: 15px;
+}
+
+.section-heading {
+    font-size: clamp(32px, 5vw, 48px);
+    letter-spacing: -2px;
+    line-height: 1.2;
+    margin-bottom: 15px;
+}
+
+.section-subtitle {
+    color: var(--muted);
+    max-width: 620px;
+    margin-bottom: 42px;
+    font-size: 14px;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    padding: 13px 21px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: linear-gradient(120deg, #2875f5, #6246ea);
+    color: white;
+    font-size: 13px;
+    font-weight: 700;
+    transition: .3s;
+    cursor: pointer;
+}
+
+.btn:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 35px #3987ff44;
+}
+
+.btn.secondary {
+    background: rgba(255,255,255,.035);
+}
+
+.glass {
+    background: linear-gradient(
+        145deg,
+        rgba(20,31,60,.9),
+        rgba(10,15,33,.85)
+    );
+    border: 1px solid var(--border);
+    backdrop-filter: blur(15px);
+}
+
+/* NAVIGATION */
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background: rgba(6,8,22,.82);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+}
+
+.navbar {
+    min-height: 76px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: 800;
+    letter-spacing: -1px;
+}
+
+.logo span {
+    color: var(--blue);
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 27px;
+    list-style: none;
+}
+
+.nav-links a {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--muted);
+    transition: .25s;
+}
+
+.nav-links a:hover {
+    color: var(--cyan);
+}
+
+.menu-button {
+    display: none;
+    border: 1px solid var(--border);
+    background: var(--panel);
+    color: white;
+    border-radius: 8px;
+    padding: 8px 12px;
+    cursor: pointer;
+}
+
+/* HERO */
+
+.hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    padding-top: 100px;
+    background:
+        radial-gradient(ellipse at 75% 40%, #163a7944, transparent 40%),
+        radial-gradient(ellipse at 15% 80%, #462b7840, transparent 35%),
+        var(--bg);
+}
+
+#particles {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.hero-grid {
+    position: absolute;
+    inset: 0;
+    opacity: .13;
+    background-image:
+        linear-gradient(#5378b2 1px, transparent 1px),
+        linear-gradient(90deg, #5378b2 1px, transparent 1px);
+    background-size: 55px 55px;
+    mask-image: linear-gradient(to bottom, black, transparent 85%);
+    pointer-events: none;
+}
+
+.hero-layout {
+    display: grid;
+    grid-template-columns: 1.1fr .9fr;
+    gap: 40px;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+}
+
+.hero-copy {
+    animation: appear 1s ease both;
+}
+
+.availability {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    border: 1px solid var(--border);
+    background: #ffffff08;
+    border-radius: 40px;
+    padding: 8px 13px;
+    color: #d0dcf4;
+    font-size: 11px;
+    margin-bottom: 25px;
+}
+
+.dot {
+    width: 7px;
+    height: 7px;
+    background: #42e8a4;
+    border-radius: 50%;
+    box-shadow: 0 0 12px #42e8a4;
+}
+
+.hero h1 {
+    font-size: clamp(46px, 6.5vw, 77px);
+    letter-spacing: -4px;
+    line-height: 1.12;
+    margin-bottom: 20px;
+}
+
+.hero h2 {
+    font-size: clamp(16px, 2vw, 22px);
+    color: #dce7ff;
+    font-weight: 500;
+    margin-bottom: 18px;
+}
+
+.hero-description {
+    color: var(--muted);
+    font-size: 14px;
+    max-width: 520px;
+    margin-bottom: 27px;
+}
+
+.hero-actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+}
+
+.socials {
+    display: flex;
+    gap: 22px;
+    flex-wrap: wrap;
+}
+
+.socials a {
+    color: #c3d1eb;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.socials a:hover {
+    color: var(--cyan);
+}
+
+/* CSS 3D OBJECT */
+
+.scene {
+    min-height: 440px;
+    display: grid;
+    place-items: center;
+    perspective: 900px;
+    position: relative;
+}
+
+.orbit {
+    position: absolute;
+    width: 340px;
+    height: 340px;
+    border: 1px solid #3987ff35;
+    border-radius: 50%;
+    transform: rotateX(68deg) rotateZ(-20deg);
+    animation: orbit 16s linear infinite;
+}
+
+.orbit.two {
+    width: 270px;
+    height: 270px;
+    border-color: #42e8ff45;
+    transform: rotateX(68deg) rotateZ(35deg);
+    animation-direction: reverse;
+    animation-duration: 12s;
+}
+
+.orbit-dot {
+    position: absolute;
+    width: 11px;
+    height: 11px;
+    background: var(--cyan);
+    border-radius: 50%;
+    box-shadow: 0 0 22px var(--cyan);
+    top: 15%;
+    left: 18%;
+}
+
+.cube-wrap {
+    width: 175px;
+    height: 175px;
+    position: relative;
+    transform-style: preserve-3d;
+    animation: float 5s ease-in-out infinite;
+}
+
+.cube {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    animation: spin 16s linear infinite;
+}
+
+.face {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    border: 1px solid #6cb8ffb0;
+    background: linear-gradient(135deg, #3987ff65, #7444d455);
+    box-shadow: inset 0 0 40px #3987ff20;
+    backdrop-filter: blur(3px);
+}
+
+.face span {
+    font-size: 48px;
+    font-weight: 800;
+    color: white;
+    text-shadow: 0 0 25px #42aaff;
+}
+
+.front  { transform: translateZ(87.5px); }
+.back   { transform: rotateY(180deg) translateZ(87.5px); }
+.right  { transform: rotateY(90deg) translateZ(87.5px); }
+.left   { transform: rotateY(-90deg) translateZ(87.5px); }
+.top    { transform: rotateX(90deg) translateZ(87.5px); }
+.bottom { transform: rotateX(-90deg) translateZ(87.5px); }
+
+.floating-label {
+    position: absolute;
+    padding: 12px 16px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 700;
+    box-shadow: 0 10px 35px #0004;
+    animation: float 4s ease-in-out infinite;
+}
+
+.label-python {
+    top: 12%;
+    right: 0;
+    color: #ffe58a;
+}
+
+.label-django {
+    bottom: 15%;
+    left: 0;
+    color: #70f0b2;
+    animation-delay: -2s;
+}
+
+.label-api {
+    bottom: 7%;
+    right: 3%;
+    color: #9ddfff;
+    animation-delay: -1s;
+}
+
+/* STATS */
+
+.stats {
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    background: #0a1021;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.stat {
+    text-align: center;
+    padding: 27px 12px;
+    border-right: 1px solid var(--border);
+}
+
+.stat:last-child {
+    border-right: none;
+}
+
+.stat h3 {
+    font-size: 28px;
+    color: var(--cyan);
+}
+
+.stat p {
+    font-size: 12px;
+    color: var(--muted);
+}
+
+/* SKILLS */
+
+.skills-section {
+    background: #f5f8ff;
+    color: #101c35;
+}
+
+.skills-section .section-subtitle {
+    color: #66738d;
+}
+
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+}
+
+.skill-card {
+    background: white;
+    border: 1px solid #e3eaf6;
+    padding: 24px 19px;
+    border-radius: 16px;
+    transition: transform .35s, box-shadow .35s;
+    transform-style: preserve-3d;
+}
+
+.skill-card:hover {
+    box-shadow: 0 18px 35px #183f7915;
+    border-color: #8ab8ff;
+}
+
+.skill-icon {
+    font-size: 27px;
+    margin-bottom: 12px;
+    transform: translateZ(20px);
+}
+
+.skill-card h3 {
+    font-size: 14px;
+    margin-bottom: 8px;
+    transform: translateZ(12px);
+}
+
+.skill-card p {
+    font-size: 12px;
+    color: #65738b;
+    line-height: 1.8;
+}
+
+/* PROJECTS */
+
+.projects-section {
+    background:
+        radial-gradient(ellipse at 90% 20%, #18326a25, transparent 45%),
+        var(--bg);
+}
+
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+}
+
+.project-card {
+    padding: 26px;
+    border-radius: 18px;
+    min-height: 365px;
+    display: flex;
+    flex-direction: column;
+    transform-style: preserve-3d;
+    transition: border-color .3s, box-shadow .3s;
+    will-change: transform;
+}
+
+.project-card:hover {
+    border-color: #3987ff99;
+    box-shadow: 0 20px 45px #0003, 0 0 25px #3987ff0c;
+}
+
+.project-number {
+    color: var(--cyan);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 3px;
+    margin-bottom: 20px;
+    transform: translateZ(20px);
+}
+
+.project-card h3 {
+    font-size: 20px;
+    margin-bottom: 13px;
+    transform: translateZ(25px);
+}
+
+.project-card p {
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 20px;
+    transform: translateZ(12px);
+}
+
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    margin-bottom: 22px;
+}
+
+.tag {
+    font-size: 10px;
+    font-weight: 700;
+    padding: 5px 8px;
+    border-radius: 6px;
+    background: #3987ff15;
+    color: #9ac4ff;
+    border: 1px solid #3987ff24;
+}
+
+.project-links {
+    display: flex;
+    gap: 18px;
+    flex-wrap: wrap;
+    margin-top: auto;
+}
+
+.project-links a {
+    color: var(--cyan);
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.project-links a:hover {
+    color: white;
+}
+
+/* ABOUT */
+
+.about-section {
+    background: #f5f8ff;
+    color: #101c35;
+}
+
+.about-section .section-subtitle {
+    color: #66738d;
+}
+
+.about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+}
+
+.about-card {
+    background: white;
+    border: 1px solid #e3eaf6;
+    border-radius: 18px;
+    padding: 30px;
+}
+
+.about-card h3 {
+    font-size: 20px;
+    margin-bottom: 16px;
+}
+
+.about-card p {
+    font-size: 13px;
+    color: #65738b;
+    margin-bottom: 15px;
+}
+
+.experience-date {
+    display: inline-block;
+    background: #eaf2ff;
+    color: #286bd0;
+    border-radius: 7px;
+    padding: 6px 10px;
+    font-size: 11px;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+.experience-list {
+    padding-left: 18px;
+    color: #65738b;
+    font-size: 13px;
+}
+
+.info-list {
+    list-style: none;
+    margin-top: 20px;
+}
+
+.info-list li {
+    border-bottom: 1px solid #e9eef6;
+    padding: 10px 0;
+    font-size: 12px;
+}
+
+.info-list strong {
+    display: inline-block;
+    width: 100px;
+}
+
+/* EDUCATION */
+
+.education-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+}
+
+.detail-card {
+    padding: 28px;
+    border-radius: 18px;
+}
+
+.detail-card h3 {
+    margin-bottom: 24px;
+    font-size: 19px;
+}
+
+.timeline {
+    border-left: 2px solid var(--blue);
+    padding-left: 18px;
+    margin-left: 5px;
+    padding-bottom: 24px;
+}
+
+.timeline:last-child {
+    padding-bottom: 0;
+}
+
+.timeline h4 {
+    font-size: 14px;
+    margin-bottom: 7px;
+}
+
+.timeline p {
+    color: var(--muted);
+    font-size: 12px;
+}
+
+.cert-list {
+    list-style: none;
+}
+
+.cert-list li {
+    padding: 13px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+    color: #d3dff4;
+}
+
+.cert-list li:last-child {
+    border-bottom: none;
+}
+
+.cert-list span {
+    color: var(--cyan);
+    margin-right: 10px;
+}
+
+/* CONTACT */
+
+.contact-section {
+    text-align: center;
+    background:
+        radial-gradient(ellipse at 50% 100%, #174ba638, transparent 55%),
+        #090d1b;
+}
+
+.contact-box {
+    max-width: 700px;
+    margin: auto;
+}
+
+.contact-box .section-subtitle {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.contact-links {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 30px;
+}
+
+.contact-item {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px 15px;
+    font-size: 12px;
+    color: #d5e2f6;
+    transition: .3s;
+}
+
+.contact-item:hover {
+    border-color: var(--cyan);
+    color: var(--cyan);
+}
+
+footer {
+    border-top: 1px solid var(--border);
+    padding: 24px 0;
+    color: var(--muted);
+    font-size: 11px;
+}
+
+.footer-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+footer a {
+    color: var(--cyan);
+}
+
+/* ANIMATIONS */
+
+@keyframes spin {
+    from { transform: rotateX(-20deg) rotateY(0deg); }
+    to   { transform: rotateX(340deg) rotateY(360deg); }
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-15px); }
+}
+
+@keyframes orbit {
+    from { rotate: 0deg; }
+    to   { rotate: 360deg; }
+}
+
+@keyframes appear {
+    from { opacity: 0; transform: translateY(25px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.reveal {
+    opacity: 0;
+    transform: translateY(25px);
+    transition: opacity .7s ease, transform .7s ease;
+}
+
+.reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* MOBILE RESPONSIVE */
+
+@media (max-width: 950px) {
+    .hero-layout {
+        grid-template-columns: 1fr 0.8fr;
+        gap: 15px;
+    }
+
+    .skills-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .projects-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .projects-grid .project-card:last-child {
+        grid-column: 1 / -1;
+    }
+
+    .nav-links {
+        gap: 13px;
+    }
+
+    .nav-links a {
+        font-size: 11px;
+    }
+}
+
+@media (max-width: 700px) {
+    section {
+        padding: 75px 0;
+    }
+
+    .navbar {
+        min-height: 68px;
+    }
+
+    .menu-button {
+        display: block;
+    }
+
+    .nav-links {
+        display: none;
+        position: absolute;
+        top: 68px;
+        left: 0;
+        width: 100%;
+        padding: 15px 5%;
+        background: #090d1b;
+        border-bottom: 1px solid var(--border);
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .nav-links.open {
+        display: flex;
+    }
+
+    .nav-links a {
+        display: block;
+        padding: 9px 0;
+        font-size: 13px;
+    }
+
+    .hero {
+        padding-top: 90px;
+    }
+
+    .hero-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .hero h1 {
+        letter-spacing: -2.5px;
+    }
+
+    .scene {
+        min-height: 330px;
+    }
+
+    .orbit {
+        width: 260px;
+        height: 260px;
+    }
+
+    .orbit.two {
+        width: 205px;
+        height: 205px;
+    }
+
+    .cube-wrap {
+        width: 120px;
+        height: 120px;
+    }
+
+    .face span {
+        font-size: 36px;
+    }
+
+    .front  { transform: translateZ(60px); }
+    .back   { transform: rotateY(180deg) translateZ(60px); }
+    .right  { transform: rotateY(90deg) translateZ(60px); }
+    .left   { transform: rotateY(-90deg) translateZ(60px); }
+    .top    { transform: rotateX(90deg) translateZ(60px); }
+    .bottom { transform: rotateX(-90deg) translateZ(60px); }
+
+    .floating-label {
+        font-size: 10px;
+        padding: 8px 11px;
+    }
+
+    .projects-grid,
+    .about-grid,
+    .education-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .projects-grid .project-card:last-child {
+        grid-column: auto;
+    }
+
+    .footer-row {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+
+@media (max-width: 420px) {
+    .skills-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-actions .btn {
+        width: 100%;
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .stat {
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+    }
+
+    .stat:last-child {
+        border-bottom: none;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
+        scroll-behavior: auto !important;
+    }
+
+    .reveal {
+        opacity: 1;
+        transform: none;
+    }
+}
+</style>
 </head>
 
 <body>
 
-    <!-- 3D Background -->
-    <canvas id="three-canvas"></canvas>
+<header>
+    <div class="container navbar">
+        <a href="#home" class="logo">Shalu <span>Gupta.</span></a>
 
-    <!-- Navigation -->
-    <header class="navbar">
-
-        <div class="logo">
-            <span>&lt;</span>Shalu<span>/&gt;</span>
-        </div>
+        <button class="menu-button" id="menuButton"
+                aria-controls="navLinks" aria-expanded="false">
+            ☰ Menu
+        </button>
 
         <nav>
-            <a href="#home">Home</a>
-            <a href="#about">About</a>
-            <a href="#skills">Skills</a>
-            <a href="#projects">Projects</a>
-            <a href="#education">Education</a>
-            <a href="#contact">Contact</a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
         </nav>
+    </div>
+</header>
 
-    </header>
+<main>
 
+<!-- HERO -->
 
-    <!-- ================= HOME ================= -->
+<section class="hero" id="home">
+    <canvas id="particles" aria-hidden="true"></canvas>
+    <div class="hero-grid"></div>
 
-    <section id="home" class="hero">
+    <div class="container hero-layout">
 
-        <div class="hero-content">
+        <div class="hero-copy">
+            <div class="availability">
+                <span class="dot"></span>
+                Open to Entry-Level Opportunities
+            </div>
 
-            <p class="hero-small">
-                HELLO, I'M
-            </p>
+            <p class="eyebrow">HELLO, I'M</p>
 
-            <h1>
-                SHALU <span>GUPTA</span>
-            </h1>
+            <h1>Shalu <span class="gradient">Gupta.</span></h1>
 
-            <h2>
-                DevOps Engineer <span>(Fresher)</span>
-            </h2>
+            <h2>Python Developer | Django Developer</h2>
 
             <p class="hero-description">
-                MCA student passionate about DevOps, Cloud,
-                Automation and Backend Development.
+                I build practical web applications and backend solutions
+                using Python, Django and Flask. I enjoy solving problems,
+                working with databases and learning technologies that
+                turn ideas into useful software.
             </p>
 
-            <div class="hero-buttons">
-
-                <a href="#projects" class="btn primary-btn">
-                    View Projects
-                </a>
-
-                <a href="resume.pdf"
-                   class="btn secondary-btn"
-                   target="_blank">
-                    Download Resume
-                </a>
-
+            <div class="hero-actions">
+                <a href="#projects" class="btn">Explore Projects ↗</a>
+                <a href="#contact" class="btn secondary">Contact Me</a>
             </div>
 
-            <div class="social-links">
-
+            <div class="socials">
                 <a href="https://github.com/shalugupta-dev"
-                   target="_blank">
-                    GitHub
-                </a>
+                   target="_blank" rel="noopener noreferrer">GitHub ↗</a>
 
-                <a href="https://linkedin.com/in/shalugupta76"
-                   target="_blank">
-                    LinkedIn
-                </a>
+                <a href="https://www.linkedin.com/in/shalugupta76"
+                   target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
 
+                <a href="mailto:sg0254150@gmail.com">Email ↗</a>
+            </div>
+        </div>
+
+        <!-- PHOTO-FREE CSS 3D CUBE -->
+
+        <div class="scene" id="scene">
+            <div class="orbit"><span class="orbit-dot"></span></div>
+            <div class="orbit two"></div>
+
+            <div class="cube-wrap">
+                <div class="cube">
+                    <div class="face front"><span>&lt;/&gt;</span></div>
+                    <div class="face back"><span>Py</span></div>
+                    <div class="face right"><span>DJ</span></div>
+                    <div class="face left"><span>{ }</span></div>
+                    <div class="face top"><span>SQL</span></div>
+                    <div class="face bottom"><span>API</span></div>
+                </div>
             </div>
 
+            <div class="floating-label label-python glass">🐍 Python</div>
+            <div class="floating-label label-django glass">⚙ Django</div>
+            <div class="floating-label label-api glass">✦ REST APIs</div>
         </div>
 
+    </div>
+</section>
 
-        <!-- 3D DevOps Card -->
+<!-- STATS -->
 
-        <div class="hero-card-container">
-
-            <div class="devops-card">
-
-                <div class="card-top">
-                    <span class="status-dot"></span>
-                    SYSTEM ONLINE
-                </div>
-
-                <div class="terminal">
-
-                    <p>
-                        <span class="terminal-green">$</span>
-                        whoami
-                    </p>
-
-                    <p class="terminal-output">
-                        Shalu Gupta
-                    </p>
-
-                    <p>
-                        <span class="terminal-green">$</span>
-                        role
-                    </p>
-
-                    <p class="terminal-output">
-                        DevOps Engineer
-                    </p>
-
-                    <p>
-                        <span class="terminal-green">$</span>
-                        skills
-                    </p>
-
-                    <p class="terminal-output">
-                        Docker | Jenkins | Kubernetes
-                    </p>
-
-                    <p>
-                        <span class="terminal-green">$</span>
-                        status
-                    </p>
-
-                    <p class="terminal-output success">
-                        Ready to Deploy 🚀
-                    </p>
-
-                </div>
-
-            </div>
-
+<div class="stats">
+    <div class="container stats-grid">
+        <div class="stat">
+            <h3>03</h3>
+            <p>Featured Projects</p>
         </div>
-
-    </section>
-
-
-    <!-- ================= ABOUT ================= -->
-
-    <section id="about" class="section">
-
-        <div class="section-title">
-
-            <p>01</p>
-
-            <h2>
-                About <span>Me</span>
-            </h2>
-
+        <div class="stat">
+            <h3>05+</h3>
+            <p>Core Technologies</p>
         </div>
-
-        <div class="about-container">
-
-            <div class="about-text">
-
-                <h3>
-                    Building, Automating & Deploying
-                </h3>
-
-                <p>
-                    I am an MCA student at IIMT College of Engineering
-                    with a strong interest in DevOps and cloud technologies.
-                </p>
-
-                <p>
-                    I have hands-on experience with Linux, Git,
-                    GitHub, Docker, Jenkins and CI/CD pipelines.
-                </p>
-
-                <p>
-                    I am currently learning and working with
-                    Kubernetes, Prometheus, Grafana and AWS.
-                </p>
-
-            </div>
-
-
-            <div class="about-box">
-
-                <div class="about-item">
-                    <strong>Education</strong>
-                    <span>MCA</span>
-                </div>
-
-                <div class="about-item">
-                    <strong>Location</strong>
-                    <span>Noida, India</span>
-                </div>
-
-                <div class="about-item">
-                    <strong>Role</strong>
-                    <span>DevOps Fresher</span>
-                </div>
-
-                <div class="about-item">
-                    <strong>Availability</strong>
-                    <span>Immediate</span>
-                </div>
-
-            </div>
-
+        <div class="stat">
+            <h3>2025</h3>
+            <p>Development Journey</p>
         </div>
+    </div>
+</div>
 
-    </section>
+<!-- SKILLS -->
 
-
-    <!-- ================= SKILLS ================= -->
-
-    <section id="skills" class="section">
-
-        <div class="section-title">
-
-            <p>02</p>
-
-            <h2>
-                Technical <span>Skills</span>
-            </h2>
-
-        </div>
-
+<section class="skills-section" id="skills">
+    <div class="container reveal">
+        <p class="eyebrow">MY TOOLKIT</p>
+        <h2 class="section-heading">Technical <span class="gradient">Skills</span></h2>
+        <p class="section-subtitle">
+            Technologies and tools I use to develop applications
+            and solve practical programming problems.
+        </p>
 
         <div class="skills-grid">
 
-            <div class="skill-card">
-                <div class="skill-icon">🐳</div>
-                <h3>Docker</h3>
-                <p>Containerization</p>
-            </div>
-
-            <div class="skill-card">
-                <div class="skill-icon">⚙️</div>
-                <h3>Jenkins</h3>
-                <p>CI/CD Automation</p>
-            </div>
-
-            <div class="skill-card">
-                <div class="skill-icon">☸️</div>
-                <h3>Kubernetes</h3>
-                <p>Container Orchestration</p>
-            </div>
-
-            <div class="skill-card">
-                <div class="skill-icon">☁️</div>
-                <h3>AWS</h3>
-                <p>Cloud Computing</p>
-            </div>
-
-            <div class="skill-card">
-                <div class="skill-icon">🐧</div>
-                <h3>Linux</h3>
-                <p>Server & System</p>
-            </div>
-
-            <div class="skill-card">
-                <div class="skill-icon">🔧</div>
-                <h3>Git & GitHub</h3>
-                <p>Version Control</p>
-            </div>
-
-            <div class="skill-card">
-                <div class="skill-icon">📊</div>
-                <h3>Prometheus</h3>
-                <p>Monitoring</p>
-            </div>
-
-            <div class="skill-card">
-                <div class="skill-icon">📈</div>
-                <h3>Grafana</h3>
-                <p>Visualization</p>
-            </div>
-
-            <div class="skill-card">
+            <article class="skill-card tilt">
                 <div class="skill-icon">🐍</div>
-                <h3>Python</h3>
-                <p>Automation & Backend</p>
-            </div>
+                <h3>Programming</h3>
+                <p>Python, JavaScript, SQL, OOP</p>
+            </article>
 
-            <div class="skill-card">
-                <div class="skill-icon">💻</div>
-                <h3>Bash</h3>
-                <p>Shell Scripting</p>
-            </div>
+            <article class="skill-card tilt">
+                <div class="skill-icon">⚙️</div>
+                <h3>Backend Development</h3>
+                <p>Django, Flask, REST APIs, CRUD</p>
+            </article>
+
+            <article class="skill-card tilt">
+                <div class="skill-icon">🗄️</div>
+                <h3>Databases</h3>
+                <p>MySQL, SQLite, SQL queries</p>
+            </article>
+
+            <article class="skill-card tilt">
+                <div class="skill-icon">🌐</div>
+                <h3>Frontend</h3>
+                <p>HTML5, CSS3, Responsive Design</p>
+            </article>
+
+            <article class="skill-card tilt">
+                <div class="skill-icon">🔧</div>
+                <h3>Developer Tools</h3>
+                <p>Git, GitHub, VS Code, GitHub Actions</p>
+            </article>
+
+            <article class="skill-card tilt">
+                <div class="skill-icon">🐳</div>
+                <h3>DevOps Basics</h3>
+                <p>Docker, CI/CD, Linux, Render</p>
+            </article>
+
+            <article class="skill-card tilt">
+                <div class="skill-icon">🧠</div>
+                <h3>Core Concepts</h3>
+                <p>OOP, Exception Handling, Debugging</p>
+            </article>
+
+            <article class="skill-card tilt">
+                <div class="skill-icon">🔗</div>
+                <h3>Backend Concepts</h3>
+                <p>Request-Response, Data Processing, CRUD</p>
+            </article>
 
         </div>
+    </div>
+</section>
 
-    </section>
+<!-- PROJECTS -->
 
+<section class="projects-section" id="projects">
+    <div class="container reveal">
 
-    <!-- ================= PROJECTS ================= -->
+        <p class="eyebrow">SELECTED WORK</p>
+        <h2 class="section-heading">Featured <span class="gradient">Projects</span></h2>
+        <p class="section-subtitle">
+            Practical projects showcasing my backend development,
+            database and deployment skills.
+        </p>
 
-    <section id="projects" class="section">
+        <div class="projects-grid">
 
-        <div class="section-title">
-
-            <p>03</p>
-
-            <h2>
-                Featured <span>Projects</span>
-            </h2>
-
-        </div>
-
-
-        <div class="projects-container">
-
-
-            <!-- Project 1 -->
-
-            <div class="project-card">
-
-                <div class="project-number">
-                    01
-                </div>
-
-                <h3>
-                    Production Flask App CI/CD
-                </h3>
-
+            <article class="project-card glass tilt">
+                <div class="project-number">PROJECT / 01</div>
+                <h3>Flask Task Manager</h3>
                 <p>
-                    Built a containerized Flask application and
-                    automated the deployment workflow using
-                    Jenkins and Docker.
+                    A task management web application with CRUD operations,
+                    SQLite integration, Docker containerization and a
+                    GitHub Actions workflow.
+                </p>
+                <div class="tags">
+                    <span class="tag">Python</span>
+                    <span class="tag">Flask</span>
+                    <span class="tag">SQLite</span>
+                    <span class="tag">Docker</span>
+                    <span class="tag">CI/CD</span>
+                </div>
+                <div class="project-links">
+                    <a href="https://flask-task-manager-9ivm.onrender.com"
+                       target="_blank" rel="noopener noreferrer">Live Demo ↗</a>
+                    <a href="https://github.com/shalugupta-dev/flask-task-manager"
+                       target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+                </div>
+            </article>
+
+            <article class="project-card glass tilt">
+                <div class="project-number">PROJECT / 02</div>
+                <h3>Student Management System</h3>
+                <p>
+                    A Django application for managing student records,
+                    tracking attendance and displaying information
+                    through dashboard views.
+                </p>
+                <div class="tags">
+                    <span class="tag">Python</span>
+                    <span class="tag">Django</span>
+                    <span class="tag">SQLite</span>
+                    <span class="tag">HTML</span>
+                    <span class="tag">CSS</span>
+                </div>
+                <div class="project-links">
+                    <a href="https://github.com/shalugupta-dev/student-management"
+                       target="_blank" rel="noopener noreferrer">Source Code ↗</a>
+                </div>
+            </article>
+
+            <article class="project-card glass tilt">
+                <div class="project-number">PROJECT / 03</div>
+                <h3>E-Commerce Application</h3>
+                <p>
+                    A Django-based e-commerce project demonstrating
+                    backend application structure, database integration
+                    and project documentation.
+                </p>
+                <div class="tags">
+                    <span class="tag">Python</span>
+                    <span class="tag">Django</span>
+                    <span class="tag">SQL</span>
+                    <span class="tag">HTML</span>
+                    <span class="tag">CSS</span>
+                </div>
+                <div class="project-links">
+                    <a href="https://github.com/shalugupta-dev/ecommerce-django"
+                       target="_blank" rel="noopener noreferrer">Source Code ↗</a>
+                </div>
+            </article>
+
+        </div>
+    </div>
+</section>
+
+<!-- ABOUT AND EXPERIENCE -->
+
+<section class="about-section" id="about">
+    <div class="container reveal">
+
+        <p class="eyebrow">A LITTLE ABOUT ME</p>
+        <h2 class="section-heading">My <span class="gradient">Journey</span></h2>
+        <p class="section-subtitle">
+            Learning through hands-on development and building
+            a strong foundation in software engineering.
+        </p>
+
+        <div class="about-grid">
+
+            <article class="about-card">
+                <h3>Who I Am</h3>
+                <p>
+                    I am an MCA student with a background in Computer
+                    Science and practical experience building web
+                    applications with Python, Django and Flask.
+                </p>
+                <p>
+                    I am interested in backend development, REST APIs,
+                    database management and application deployment.
+                    I enjoy learning by building projects and improving
+                    my problem-solving skills.
+                </p>
+                <p>
+                    My goal is to join a development team where I can
+                    contribute, learn from experienced developers and
+                    grow as a software professional.
                 </p>
 
-                <div class="project-tech">
+                <ul class="info-list">
+                    <li><strong>Location</strong> Noida, India</li>
+                    <li><strong>Speciality</strong> Python & Django</li>
+                    <li><strong>Education</strong> MCA, Pursuing</li>
+                </ul>
+            </article>
 
-                    <span>Python</span>
-                    <span>Flask</span>
-                    <span>Docker</span>
-                    <span>Jenkins</span>
-                    <span>Linux</span>
+            <article class="about-card" id="experience">
+                <p class="eyebrow">EXPERIENCE</p>
+                <h3>Python Development Intern</h3>
+                <span class="experience-date">June 2025 – August 2025</span>
+                <p><strong>CodeAlpha</strong></p>
+                <ul class="experience-list">
+                    <li>Practiced Python and OOP concepts.</li>
+                    <li>Worked with file handling and exception handling.</li>
+                    <li>Used Git and GitHub for version control.</li>
+                    <li>Practiced debugging and problem-solving.</li>
+                </ul>
+            </article>
 
+        </div>
+    </div>
+</section>
+
+<!-- EDUCATION -->
+
+<section id="education">
+    <div class="container reveal">
+
+        <p class="eyebrow">ACADEMICS & LEARNING</p>
+        <h2 class="section-heading">Education & <span class="gradient">Certifications</span></h2>
+        <p class="section-subtitle">
+            My academic background and ongoing technical learning.
+        </p>
+
+        <div class="education-grid">
+
+            <article class="detail-card glass">
+                <h3>🎓 Education</h3>
+
+                <div class="timeline">
+                    <h4>Master of Computer Applications</h4>
+                    <p>IIMT College of Engineering</p>
+                    <p>2025 – Present · Expected 2027</p>
                 </div>
 
-                <a href="https://github.com/shalugupta-dev"
-                   target="_blank"
-                   class="project-link">
-                    View on GitHub →
+                <div class="timeline">
+                    <h4>B.Sc. Computer Science</h4>
+                    <p>Invertis University</p>
+                    <p>Completed 2025 · 73%</p>
+                </div>
+            </article>
+
+            <article class="detail-card glass">
+                <h3>📜 Certifications</h3>
+
+                <ul class="cert-list">
+                    <li><span>✓</span> SQL Development – Coursera</li>
+                    <li><span>✓</span> Introduction to Linux – Linux Foundation</li>
+                    <li><span>✓</span> Git and GitHub – GitHub Skills</li>
+                    <li><span>✓</span> Docker Training</li>
+                </ul>
+            </article>
+
+        </div>
+    </div>
+</section>
+
+<!-- CONTACT -->
+
+<section class="contact-section" id="contact">
+    <div class="container reveal">
+        <div class="contact-box">
+
+            <p class="eyebrow">LET'S CONNECT</p>
+            <h2 class="section-heading">
+                Let's Create Something <span class="gradient">Great.</span>
+            </h2>
+
+            <p class="section-subtitle">
+                Looking for an entry-level Python, Django or Backend
+                Developer opportunity? Feel free to get in touch.
+            </p>
+
+            <a href="mailto:sg0254150@gmail.com" class="btn">
+                Contact Me ↗
+            </a>
+
+            <div class="contact-links">
+                <a class="contact-item" href="mailto:sg0254150@gmail.com">
+                    ✉ sg0254150@gmail.com
                 </a>
 
-            </div>
-
-
-            <!-- Project 2 -->
-
-            <div class="project-card">
-
-                <div class="project-number">
-                    02
-                </div>
-
-                <h3>
-                    Kubernetes Application Deployment
-                </h3>
-
-                <p>
-                    Deployed applications using Kubernetes and
-                    Minikube and worked with monitoring using
-                    Prometheus and Grafana.
-                </p>
-
-                <div class="project-tech">
-
-                    <span>Kubernetes</span>
-                    <span>Minikube</span>
-                    <span>Prometheus</span>
-                    <span>Grafana</span>
-                    <span>Docker</span>
-
-                </div>
-
-                <a href="https://github.com/shalugupta-dev"
-                   target="_blank"
-                   class="project-link">
-                    View on GitHub →
+                <a class="contact-item" href="tel:+917668272902">
+                    ☎ 7668272902
                 </a>
 
+                <a class="contact-item"
+                   href="https://github.com/shalugupta-dev"
+                   target="_blank" rel="noopener noreferrer">
+                    GitHub ↗
+                </a>
+
+                <a class="contact-item"
+                   href="https://www.linkedin.com/in/shalugupta76"
+                   target="_blank" rel="noopener noreferrer">
+                    LinkedIn ↗
+                </a>
             </div>
 
         </div>
+    </div>
+</section>
 
-    </section>
+</main>
 
-
-    <!-- ================= DEVOPS FLOW ================= -->
-
-    <section class="section">
-
-        <div class="section-title">
-
-            <p>04</p>
-
-            <h2>
-                My DevOps <span>Workflow</span>
-            </h2>
-
-        </div>
-
-
-        <div class="workflow">
-
-            <div class="workflow-item">
-                <span>01</span>
-                <strong>GitHub</strong>
-                <small>Code</small>
-            </div>
-
-            <div class="workflow-arrow">→</div>
-
-            <div class="workflow-item">
-                <span>02</span>
-                <strong>Jenkins</strong>
-                <small>CI/CD</small>
-            </div>
-
-            <div class="workflow-arrow">→</div>
-
-            <div class="workflow-item">
-                <span>03</span>
-                <strong>Docker</strong>
-                <small>Container</small>
-            </div>
-
-            <div class="workflow-arrow">→</div>
-
-            <div class="workflow-item">
-                <span>04</span>
-                <strong>Kubernetes</strong>
-                <small>Deploy</small>
-            </div>
-
-            <div class="workflow-arrow">→</div>
-
-            <div class="workflow-item">
-                <span>05</span>
-                <strong>Grafana</strong>
-                <small>Monitor</small>
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- ================= EDUCATION ================= -->
-
-    <section id="education" class="section">
-
-        <div class="section-title">
-
-            <p>05</p>
-
-            <h2>
-                <span>Education</span>
-            </h2>
-
-        </div>
-
-
-        <div class="education-card">
-
-            <div>
-
-                <span class="education-year">
-                    2025 - 2027
-                </span>
-
-                <h3>
-                    Master of Computer Applications
-                </h3>
-
-                <p>
-                    IIMT College of Engineering
-                </p>
-
-                <p>
-                    Greater Noida, Uttar Pradesh
-                </p>
-
-            </div>
-
-        </div>
-
-
-        <div class="education-card">
-
-            <div>
-
-                <span class="education-year">
-                    2022 - 2025
-                </span>
-
-                <h3>
-                    Bachelor of Science in Computer Science
-                </h3>
-
-                <p>
-                    Invertis University
-                </p>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- ================= CONTACT ================= -->
-
-    <section id="contact" class="section contact-section">
-
-        <div class="section-title">
-
-            <p>06</p>
-
-            <h2>
-                Let's <span>Connect</span>
-            </h2>
-
-        </div>
-
-
-        <p class="contact-text">
-            I am looking for an entry-level DevOps opportunity
-            where I can learn, contribute and grow.
-        </p>
-
-
-        <div class="contact-buttons">
-
-            <a href="mailto:sg0254150@gmail.com"
-               class="btn primary-btn">
-                Email Me
-            </a>
-
-            <a href="https://linkedin.com/in/shalugupta76"
-               target="_blank"
-               class="btn secondary-btn">
-                LinkedIn
-            </a>
-
-            <a href="https://github.com/shalugupta-dev"
-               target="_blank"
-               class="btn secondary-btn">
-                GitHub
-            </a>
-
-        </div>
-
-    </section>
-
-
-    <!-- ================= FOOTER ================= -->
-
-    <footer>
-
-        <p>
-            © <span id="year"></span> Shalu Gupta
-        </p>
-
-        <p>
-            DevOps Engineer | Docker | Kubernetes | CI/CD
-        </p>
-
-    </footer>
-
-
-    <!-- JavaScript -->
-    <script src="script.js"></script>
+<footer>
+    <div class="container footer-row">
+        <p>© <span id="year"></span> Shalu Gupta. All rights reserved.</p>
+        <a href="#home">Back to Top ↑</a>
+    </div>
+</footer>
+
+<script>
+// Mobile navigation
+
+const menuButton = document.getElementById("menuButton");
+const navLinks = document.getElementById("navLinks");
+
+menuButton.addEventListener("click", () => {
+    const open = navLinks.classList.toggle("open");
+    menuButton.setAttribute("aria-expanded", String(open));
+    menuButton.textContent = open ? "✕ Close" : "☰ Menu";
+});
+
+document.querySelectorAll(".nav-links a").forEach(link => {
+    link.addEventListener("click", () => {
+        navLinks.classList.remove("open");
+        menuButton.setAttribute("aria-expanded", "false");
+        menuButton.textContent = "☰ Menu";
+    });
+});
+
+// Dynamic copyright year
+
+document.getElementById("year").textContent = new Date().getFullYear();
+
+// Scroll reveal animation
+
+const revealObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            revealObserver.unobserve(entry.target);
+        }
+    });
+}, { threshold: 0.08 });
+
+document.querySelectorAll(".reveal").forEach(el => {
+    revealObserver.observe(el);
+});
+
+// 3D tilt on cards, enabled for mouse devices
+
+const canHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+if (canHover && !reduceMotion) {
+    document.querySelectorAll(".tilt").forEach(card => {
+        card.addEventListener("mousemove", event => {
+            const rect = card.getBoundingClientRect();
+
+            const x = (event.clientX - rect.left) / rect.width;
+            const y = (event.clientY - rect.top) / rect.height;
+
+            const rotateY = (x - 0.5) * 10;
+            const rotateX = (0.5 - y) * 10;
+
+            card.style.transform =
+                `perspective(900px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
+        });
+
+        card.addEventListener("mouseleave", () => {
+            card.style.transform = "";
+        });
+    });
+}
+
+// Animated background particles
+
+const canvas = document.getElementById("particles");
+const ctx = canvas.getContext("2d");
+let particles = [];
+let animationId;
+let width = 0;
+let height = 0;
+
+function resizeCanvas() {
+    const rect = canvas.getBoundingClientRect();
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+    width = rect.width;
+    height = rect.height;
+
+    canvas.width = width * dpr;
+    canvas.height = height * dpr;
+
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+    const count = Math.min(65, Math.floor(width / 18));
+
+    particles = Array.from({ length: count }, () => ({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        radius: Math.random() * 1.7 + 0.5,
+        vx: (Math.random() - 0.5) * 0.35,
+        vy: (Math.random() - 0.5) * 0.35
+    }));
+}
+
+function drawParticles() {
+    ctx.clearRect(0, 0, width, height);
+
+    particles.forEach((p, i) => {
+        p.x += p.vx;
+        p.y += p.vy;
+
+        if (p.x < 0 || p.x > width) p.vx *= -1;
+        if (p.y < 0 || p.y > height) p.vy *= -1;
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+        ctx.fillStyle = "#64baff";
+        ctx.fill();
+
+        for (let j = i + 1; j < particles.length; j++) {
+            const q = particles[j];
+            const dx = p.x - q.x;
+            const dy = p.y - q.y;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+
+            if (distance < 105) {
+                ctx.beginPath();
+                ctx.moveTo(p.x, p.y);
+                ctx.lineTo(q.x, q.y);
+                ctx.strokeStyle = `rgba(70,150,255,${0.14 * (1 - distance / 105)})`;
+                ctx.lineWidth = 0.7;
+                ctx.stroke();
+            }
+        }
+    });
+
+    animationId = requestAnimationFrame(drawParticles);
+}
+
+resizeCanvas();
+
+if (!reduceMotion) {
+    drawParticles();
+}
+
+window.addEventListener("resize", () => {
+    cancelAnimationFrame(animationId);
+    resizeCanvas();
+
+    if (!reduceMotion) {
+        drawParticles();
+    }
+});
+</script>
 
 </body>
 </html>
